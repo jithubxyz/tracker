@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  # root tracker service
+  root-tracker:
+    init: true
+    restart: unless-stopped
+    build: .
+    ports:
+      - '4000:4000'
+    environment:
+      NODE_ENV: 'development'
+      STARTUP_MODE: 'ROOT'
+  # regular tracker service (to be scaled)
+  tracker:
+    init: true
+    restart: unless-stopped
+    build: .
+    ports:
+      - '4001:4001'
+    environment:
+      NODE_ENV: 'development'
+      STARTUP_MODE: 'REGULAR'

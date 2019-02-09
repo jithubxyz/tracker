@@ -1,0 +1,25 @@
+{
+	"name": "tracker",
+	"version": "1.0.0",
+	"description": "JitHub tracker service",
+	"main": "build/index.js",
+	"repository": "https://github.com/jithubxyz/tracker",
+	"license": "MIT",
+	"private": true,
+	"contributors": [
+		{
+			"name": "Bruno Scheufler",
+			"email": "bruno@brunoscheufler.com",
+			"url": "https://brunoscheufler.com"
+		}
+	],
+	"devDependencies": {
+		"@types/node": "^10.12.24",
+		"tslint": "^5.12.1",
+		"typescript": "^3.3.3"
+	},
+	"scripts": {
+		"build": "tsc --project .",
+		"lint": "tslint --project ."
+	}
+}
