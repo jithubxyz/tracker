@@ -1,6 +1,9 @@
 import { setupErrorHandlers } from './util';
 import { StartupMode } from './types';
-import { STARTUP_MODE } from './env';
+import { STARTUP_MODE, INTERNAL_PORT, EXTERNAL_PORT } from './env';
+
+import { start as startRoot } from './servers/root';
+import { start as startRegular } from './servers/regular';
 
 setupErrorHandlers();
 
@@ -8,11 +11,11 @@ setupErrorHandlers();
 	switch (STARTUP_MODE) {
 		case StartupMode.ROOT:
 			console.log('Starting tracker in ROOT mode');
-			// TODO Implement ROOT mode startup
+			startRoot(INTERNAL_PORT, EXTERNAL_PORT);
 			break;
 		case StartupMode.REGULAR:
 			console.log('Starting tracker in REGULAR mode');
-			// TODO Implement REGULAR mode startup
+			startRegular(EXTERNAL_PORT);
 			break;
 		default:
 			throw new Error(

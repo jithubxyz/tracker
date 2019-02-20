@@ -11,9 +11,15 @@
 			"name": "Bruno Scheufler",
 			"email": "bruno@brunoscheufler.com",
 			"url": "https://brunoscheufler.com"
+		},
+		{
+			"name": "Tim Weiß",
+			"email": "tim@weiss.moe",
+			"url": "https://weiss.moe"
 		}
 	],
 	"devDependencies": {
+		"@types/express": "^4.16.1",
 		"@types/node": "^10.12.24",
 		"tslint": "^5.12.1",
 		"typescript": "^3.3.3"
@@ -21,5 +27,8 @@
 	"scripts": {
 		"build": "tsc --project .",
 		"lint": "tslint --project ."
+	},
+	"dependencies": {
+		"express": "^4.16.4"
 	}
 }
