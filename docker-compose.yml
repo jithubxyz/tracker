@@ -6,17 +6,21 @@ services:
     restart: unless-stopped
     build: .
     ports:
+      - '5000:5000'
       - '4000:4000'
     environment:
       NODE_ENV: 'development'
       STARTUP_MODE: 'ROOT'
+      INTERNAL_PORT: 5000
+      EXTERNAL_PORT: 4000
   # regular tracker service (to be scaled)
   tracker:
     init: true
     restart: unless-stopped
     build: .
     ports:
-      - '4001:4001'
+      - '6000:6000'
     environment:
       NODE_ENV: 'development'
       STARTUP_MODE: 'REGULAR'
+      EXTERNAL_PORT: 6000
