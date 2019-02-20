@@ -13,10 +13,6 @@ external.get('/trackers', (req, res) => {
 
 // Internal Routes
 
-internal.get('/', (request, res) => {
-	res.send('dab');
-});
-
 internal.get('/trackers', (req, res) => {
 	res.json({ trackers: Array.from(trackers.values()) });
 });
