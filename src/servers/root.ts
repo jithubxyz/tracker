@@ -8,7 +8,7 @@ export const internal = express();
 export const external = express();
 
 external.get('/trackers', (req, res) => {
-	res.json({ trackers });
+	res.json({ trackers: Array.from(trackers.values()) });
 });
 
 // Internal Routes
