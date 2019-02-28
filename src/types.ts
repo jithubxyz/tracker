@@ -16,3 +16,11 @@ export interface Client extends Connectable {
 	walletId: string;
 	lastHeartbeat: number;
 }
+
+export interface Token {
+	hash: string;
+	content: string;
+	createdAt: Date;
+
+	trackerId: string | null;
+}
