@@ -21,6 +21,22 @@ Tracker instances are configured by supplying specific environment variables, mo
 
 - Supported values are: `ROOT`, `REGULAR`
 
+## API
+The tracker provides two sets of endpoints: *internal* and *external*. Internal endpoints should only be exposed internally to other trackers. The external endpoint needs to be publicly accessible.
+### `ROOT` Mode
+#### External
+- `/trackers` (GET): Provides a list of registered trackers.
+
+#### Internal
+- `/trackers` (GET): Same as External. Provides a list of registered trackers.
+- `/trackers` (POST): Registers sender as a tracker.
+
+### `REGULAR` Mode
+#### External
+- `/clients` (GET): Provides a list of registered clients.
+- `/clients` (POST): Registers sender as a client.
+- `/clients` (PUT): Updates heartbeat information of client.
+
 ## license
 
 The JitHub tracker service is licensed under the [MIT License](LICENSE).
