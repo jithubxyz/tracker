@@ -4,7 +4,7 @@
 	"tabWidth": 2,
 	"singleQuote": true,
 	"semi": true,
-	"printWidth": 80,
+	"printWidth": 100,
 	"endOfLine": "lf",
 	"arrowParens": "avoid",
 	"bracketSpacing": true

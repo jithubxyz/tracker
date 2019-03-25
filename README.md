@@ -29,14 +29,10 @@ The tracker provides two sets of endpoints: *internal* and *external*. Internal 
 
 #### Internal
 - `/trackers` (GET): Same as External. Provides a list of registered trackers.
-- `/trackers` (POST): Registers sender as a tracker.
 
 #### Admin
-- `/tokens` (GET): Provides a list of generated (and valid) tokens.
-- `/tokens` (POST): Generates a new token.
-- `/tokens` (DELETE): Removes a token.
-
-- `/trackers` (DELETE): Removes a tracker from the list.
+- `/trackers` (POST): Generates a new token and creates a tracker.
+- `/trackers/:trackerId` (DELETE): Removes a tracker from the list.
 
 ### `REGULAR` Mode
 #### External
