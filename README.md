@@ -22,14 +22,17 @@ Tracker instances are configured by supplying specific environment variables, mo
 - Supported values are: `ROOT`, `REGULAR`
 
 ## API
-The tracker provides two sets of endpoints: *internal* and *external*. Internal endpoints should only be exposed internally to other trackers. The external endpoint needs to be publicly accessible.
+The tracker provides two sets of endpoints: *internal* and *external*. Internal endpoints should only be exposed internally to other trackers. The external endpoint needs to be publicly accessible. `ROOT`-only: *admin* endpoint should not be exposed and is for internal consumption only.
 ### `ROOT` Mode
 #### External
 - `/trackers` (GET): Provides a list of registered trackers.
 
 #### Internal
 - `/trackers` (GET): Same as External. Provides a list of registered trackers.
-- `/trackers` (POST): Registers sender as a tracker.
+
+#### Admin
+- `/trackers` (POST): Generates a new token and creates a tracker.
+- `/trackers/:trackerId` (DELETE): Removes a tracker from the list.
 
 ### `REGULAR` Mode
 #### External

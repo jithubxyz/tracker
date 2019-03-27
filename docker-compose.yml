@@ -6,13 +6,16 @@ services:
     restart: unless-stopped
     build: .
     ports:
+      - '7000:7000'
       - '5000:5000'
       - '4000:4000'
     environment:
       NODE_ENV: 'development'
       STARTUP_MODE: 'ROOT'
+      ADMIN_PORT: 7000
       INTERNAL_PORT: 5000
       EXTERNAL_PORT: 4000
+      JWT_SECRET: jit!
   # regular tracker service (to be scaled)
   tracker:
     init: true

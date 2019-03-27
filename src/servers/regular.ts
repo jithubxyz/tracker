@@ -38,4 +38,5 @@ external.put('/clients', express.json(), (req, res) => {
 
 export const start = (externalPort: number) => {
 	external.listen(externalPort);
+	console.log(`Listening on EXTERNAL=${externalPort}`);
 };
