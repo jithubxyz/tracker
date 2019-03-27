@@ -6,6 +6,7 @@ import { Tracker } from '../types';
 import { trackers } from '../cache';
 import { createToken, getTrackers } from '../util';
 import { JWT_SECRET } from '../env';
+import { registerAsTracker } from '../middleware';
 
 export const internal = express();
 export const external = express();
@@ -17,7 +18,7 @@ external.get('/trackers', (req, res) => {
 
 // Internal Routes
 
-internal.get('/trackers', expressJwt({ secret: JWT_SECRET! }), (req, res) => {
+internal.get('/trackers', expressJwt({ secret: JWT_SECRET || 'jit!' }), registerAsTracker, (req, res) => {
 	res.json({ trackers: getTrackers(trackers, true) });
 });
 
@@ -61,4 +62,5 @@ export const start = (
 	internal.listen(internalPort);
 	external.listen(externalPort);
 	admin.listen(adminPort);
+	console.log(`Listening on INTERNAL=${internalPort}; EXTERNAL=${externalPort}; ADMIN=${adminPort}`);
 };

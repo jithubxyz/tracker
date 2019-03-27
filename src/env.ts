@@ -1,3 +1,5 @@
+import { StartupMode } from './types';
+
 const missingEnvError = (name: string) =>
 	new Error(`Missing env variable ${name}`);
 
@@ -11,6 +13,6 @@ export const EXTERNAL_PORT = parseInt(process.env.EXTERNAL_PORT!, 10) || 4000;
 export const ADMIN_PORT = parseInt(process.env.ADMIN_PORT!, 10) || 6000;
 
 export const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) {
+if (!JWT_SECRET && STARTUP_MODE === StartupMode.ROOT) {
 	throw missingEnvError('JWT_SECRET');
 }

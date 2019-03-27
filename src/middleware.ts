@@ -8,8 +8,11 @@ export async function registerAsTracker(req: Request, res: Response, next: NextF
 			tracker.address = req.ip;
 
 			trackers.set(tracker.id, tracker);
+			next();
+			return;
 		} else {
 			res.status(403).send({ status: 'missingTracker' });
+			return;
 		}
 	}
 
