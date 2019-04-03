@@ -6,6 +6,10 @@ import { clients } from '../cache';
 
 export const external = express();
 
+external.get('/', (req, res) => {
+	res.json({ message: 'uwu' });
+});
+
 external.get('/clients', (req, res) => {
 	res.json({ clients: Array.from(clients.values()) });
 });
