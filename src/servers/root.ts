@@ -18,8 +18,29 @@ external.get('/trackers', (req, res) => {
 
 // Internal Routes
 
-internal.get('/trackers', expressJwt({ secret: JWT_SECRET || 'jit!' }), registerAsTracker, (req, res) => {
+internal.get('/trackers', expressJwt({ secret: JWT_SECRET || 'jit!' }), (req, res) => {
 	res.json({ trackers: getTrackers(trackers, true) });
+});
+
+internal.post('/heartbeat',
+	expressJwt({ secret: JWT_SECRET || 'jit!' }),
+	registerAsTracker,
+	(req, res) => {
+
+	if (!req.user) {
+		return res.sendStatus(401);
+	}
+
+	const tracker = trackers.get(req.user.id);
+	if (!tracker) {
+		return res.sendStatus(404);
+	}
+
+	tracker.lastHeartbeat = Date.now();
+
+	trackers.set(tracker.id, tracker);
+
+	res.json({ status: 'Ok' });
 });
 
 // Admin Routes
@@ -34,7 +55,8 @@ admin.post('/trackers', express.json(), async (req, res) => {
 		id,
 		name,
 		token,
-		address: null
+		address: null,
+		lastHeartbeat: null
 	};
 
 	trackers.set(id, tracker);
