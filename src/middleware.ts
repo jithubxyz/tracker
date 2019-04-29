@@ -5,7 +5,7 @@ export async function registerAsTracker(req: Request, res: Response, next: NextF
 	if (req.user) {
 		const tracker = trackers.get(req.user.id);
 		if (tracker) {
-			tracker.address = req.ip;
+			tracker.address = `http://${req.ip}`; // TODO: determine protocol
 
 			trackers.set(tracker.id, tracker);
 			next();

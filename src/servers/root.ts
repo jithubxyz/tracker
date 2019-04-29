@@ -28,12 +28,12 @@ internal.post('/heartbeat',
 	(req, res) => {
 
 	if (!req.user) {
-		return res.sendStatus(401);
+		return res.status(401).json({});
 	}
 
 	const tracker = trackers.get(req.user.id);
 	if (!tracker) {
-		return res.sendStatus(404);
+		return res.status(404).json({});
 	}
 
 	tracker.lastHeartbeat = Date.now();
