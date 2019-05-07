@@ -1,10 +1,13 @@
 import express from 'express';
 import { randomBytes } from 'crypto';
+import cors from 'cors';
 
 import { Client } from '../types';
 import { clients } from '../cache';
 
 export const external = express();
+
+external.use(cors({ origin: '*', allowedHeaders: '*' }));
 
 external.get('/', (req, res) => {
 	res.json({ message: 'uwu' });
