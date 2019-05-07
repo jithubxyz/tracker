@@ -35,7 +35,7 @@ export function cleanTracker(tracker: Tracker) {
 }
 
 export function validTracker(tracker: Tracker) {
-	return tracker.address !== null;
+	return tracker.address !== null && tracker.lastHeartbeat !== null;
 }
 
 export function getTrackers(map: Map<string, Tracker>, filter?: boolean) {

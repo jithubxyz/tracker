@@ -22,8 +22,10 @@ services:
     restart: unless-stopped
     build: .
     ports:
-      - '6000:6000'
+      - '80:6000'
     environment:
       NODE_ENV: 'development'
       STARTUP_MODE: 'REGULAR'
       EXTERNAL_PORT: 6000
+      ROOT_URL: 'http://root-tracker:5000'
+      # TOKEN: 'ADD_TOKEN_HERE'

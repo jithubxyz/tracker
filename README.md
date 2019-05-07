@@ -29,6 +29,7 @@ The tracker provides two sets of endpoints: *internal* and *external*. Internal 
 
 #### Internal
 - `/trackers` (GET): Same as External. Provides a list of registered trackers.
+- `/heartbeat` (POST): Registers a regular tracker on the first hit and updates the last heartbeat.
 
 #### Admin
 - `/trackers` (POST): Generates a new token and creates a tracker.

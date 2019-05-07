@@ -1,9 +1,10 @@
 import { setupErrorHandlers } from './util';
 import { StartupMode } from './types';
-import { STARTUP_MODE, INTERNAL_PORT, EXTERNAL_PORT, ADMIN_PORT } from './env';
+import { STARTUP_MODE, INTERNAL_PORT, EXTERNAL_PORT, ADMIN_PORT, ROOT_URL } from './env';
 
 import { start as startRoot } from './servers/root';
 import { start as startRegular } from './servers/regular';
+import { connectToRoot } from './heartbeat';
 
 setupErrorHandlers();
 
@@ -16,6 +17,7 @@ setupErrorHandlers();
 		case StartupMode.REGULAR:
 			console.log('Starting tracker in REGULAR mode');
 			startRegular(EXTERNAL_PORT);
+			connectToRoot(ROOT_URL);
 			break;
 		default:
 			throw new Error(

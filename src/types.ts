@@ -6,6 +6,7 @@ export enum StartupMode {
 interface Connectable {
 	id: string;
 	address: string | null;
+	lastHeartbeat: number | null;
 }
 
 export interface Tracker extends Connectable {
@@ -15,7 +16,6 @@ export interface Tracker extends Connectable {
 
 export interface Client extends Connectable {
 	walletId: string;
-	lastHeartbeat: number;
 }
 
 export interface Token {

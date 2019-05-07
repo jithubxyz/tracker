@@ -1,13 +1,25 @@
 import express from 'express';
 import { randomBytes } from 'crypto';
+import cors from 'cors';
 
 import { Client } from '../types';
 import { clients } from '../cache';
 
 export const external = express();
 
+external.use(cors({ origin: '*', allowedHeaders: '*' }));
+
+external.get('/', (req, res) => {
+	res.json({ message: 'uwu' });
+});
+
 external.get('/clients', (req, res) => {
-	res.json({ clients: Array.from(clients.values()) });
+	res.json({
+		clients: Array.from(clients.values()).map(c => {
+			delete c.id;
+			return c;
+		})
+	});
 });
 
 external.post('/clients', express.json(), (req, res) => {
@@ -16,7 +28,7 @@ external.post('/clients', express.json(), (req, res) => {
 	const client: Client = {
 		id,
 		walletId: req.body.walletId,
-		address: req.ip,
+		address: `http://${req.ip}`, // TODO: determine protocol
 		lastHeartbeat: Date.now()
 	};
 
@@ -34,6 +46,23 @@ external.put('/clients', express.json(), (req, res) => {
 	}
 
 	res.json({ time: Date.now() });
+});
+
+external.post('/heartbeat', express.json(), (req, res) => {
+	const { id } = req.body;
+
+	const client = clients.get(id);
+
+	if (!client) {
+		res.sendStatus(404);
+		return;
+	}
+
+	client.lastHeartbeat = Date.now();
+
+	clients.set(id, client);
+
+	res.json({ id });
 });
 
 export const start = (externalPort: number) => {
